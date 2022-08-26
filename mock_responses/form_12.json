@@ -1,0 +1,19 @@
+{
+    "form": {
+        "id": "12",
+        "name": "Electromagnetic Multipoles",
+        "description": "The multipoles can be given in 4 unique sets of isospin or charge channels: a_1 x_1 + a_2 x_2 + . . . + a_{n-1} x_{n-1} + a_n x_n = \\sum_{I=1}^{n} a_i x_i",
+        "references": "D. Drechsel and L. Tiator, J. Phys. G 18 (1992) 449-497  \\href{https://maid.kph.uni-mainz.de/JPhysG18/JPhysG18.pdf}{[pdf]}",
+        "x_column_names": ["Angle", "Spin"],
+	"y_column_names": ["Amplitude"],
+	
+	"data_preview_column_headings": ["Angle", "Spin", "Amplitude"],
+        "data_preview": [
+            [0.000, 0, 0.8039],
+            [10.000, 0, 0.7142],
+            [20.000, 0, 0.5771],
+            [30.000, 0, 0.4653],
+            [40.000, 0, 0.3736]
+        ]
+    }
+}

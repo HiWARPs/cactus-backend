@@ -1,0 +1,28 @@
+{
+  "projects": [{
+      "id": "1",
+      "name": "electrons",
+      "forms": [{
+        "id": "11",
+        "name": "Amplitudes"
+      },
+      {
+        "id": "12",
+        "name": "Electromagnetic Multipoles"
+      }]
+    },
+    {
+      "id": "2",
+      "name": "frogs",
+      "forms": [{
+        "id": "21",
+        "name": "green frogs!"
+      }]
+    },
+    {
+      "id": "3",
+      "name": "workers",
+      "forms": []
+    }
+  ]
+}
