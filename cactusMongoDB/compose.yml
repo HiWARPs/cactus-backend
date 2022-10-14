@@ -4,7 +4,7 @@ services:
     image: mongo
     restart: always
     volumes:
-      - /cactus/cactus-backend/cactusMongoDB:cactus/cactusMongoDB
+      - ../../cactus-backend:/cactus-backend/
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
@@ -21,6 +21,6 @@ services:
   backend:
     image: "kaktus/backend"
     volumes:
-      - /cactus/cactus-backend/:cactus/cactusBackend
+      - ../../cactus-backend/:/cactus-backend
     environment: 
-      - USER=kate
+      - USER=root
