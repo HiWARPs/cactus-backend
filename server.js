@@ -21,6 +21,11 @@ app.post("/form/12/execute", executeForm);
 app.get("/data", getData);
 app.get("/test", getTestData)
 
+var multer  = require('multer');
+const upload = multer({ dest: 'uploads/' })
+
+// Endpoint which accepts a CSV file and parses it.
+app.post("/functions",upload.single('uploaded_file'), uploadFunctions);
 app.listen(3001)
 console.log("Node.js Express server is listening on port 3001...")
 
@@ -28,6 +33,21 @@ console.log("Node.js Express server is listening on port 3001...")
 /////////////////////////////////
 // Implementation of routes
 //
+
+
+// A function to accept a CSV from a REST endpoint and parse it.
+function uploadFunctions(req, res, next) {
+    const csv = require('csv-parser')
+    var results = []
+
+
+  fs.createReadStream(req.file.path)
+        .pipe(csv())
+        .on('data', (data) => results.push(data))
+        .on('end', () => {
+          res.json(results);
+        });
+}
 
 function welcome(req, res) {
   res.json({ message: "☃️️ Welcome to Project Cactus. Our mock backend is ready for you.️ ☃️" });
