@@ -15,10 +15,6 @@ app.use(cors());
 // Routes
 //
 app.get("/", welcome);
-app.get("/projects", getProjects);
-app.get("/form/12", getForm);
-app.post("/form/12/execute", executeForm);
-app.get("/data", getData);
 app.get("/test", getTestData)
 
 var multer  = require('multer');
@@ -51,38 +47,6 @@ function uploadFunctions(req, res, next) {
 
 function welcome(req, res) {
   res.json({ message: "☃️️ Welcome to Project Cactus. Our mock backend is ready for you.️ ☃️" });
-}
-
-function getProjects(req, res) {
-  let filename = "mock_responses/projects.json";
-
-  let rawData = fs.readFileSync(filename);
-  let jsonData = JSON.parse(rawData);
-  res.json(jsonData);
-}
-
-function getForm(req, res) {
-  let filename = "mock_responses/form_12.json";
-
-  let rawData = fs.readFileSync(filename);
-  let jsonData = JSON.parse(rawData);
-  res.json(jsonData);
-}
-
-function executeForm(req, res) {
-  let filename = "mock_responses/form_12_query_data.json";
-      
-  let rawData = fs.readFileSync(filename);
-  let jsonData = JSON.parse(rawData);
-  res.json(jsonData);
-}
-
-function getData(req, res) {
-  let filename = "mock_responses/data.json";
-      
-  let rawData = fs.readFileSync(filename);
-  let jsonData = JSON.parse(rawData);
-  res.json(jsonData);    
 }
 
 function getTestData(req, res) {
