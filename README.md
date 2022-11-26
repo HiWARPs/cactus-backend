@@ -13,7 +13,7 @@ The backend for Project Cactus
 
 Dennis, feel free to remove this section once you are done with the upload mechanism.
 
-I wrote a simple endpint which takes a CSV file, parses it and returns it as a response. To test this, you can follow 
+I wrote a simple endpoint which takes a CSV file, parses it and returns it as a response. To test this, you can follow 
 these steps:
 
 1. Start server.js
