@@ -32,7 +32,7 @@ console.log("Node.js Express server is listening on port 3001...")
 
 
 // A function to accept a CSV from a REST endpoint and parse it.
-function uploadFunctions(req, res, next) {
+function uploadFunctions(req, res) {
     const csv = require('csv-parser')
     var results = []
 
@@ -41,11 +41,12 @@ function uploadFunctions(req, res, next) {
         .pipe(csv())
         .on('data', (data) => results.push(data))
         .on('end', () => {
-          res.json(results);
-        });
+            db.collection('Electrons').insert(results, function(err, result) {
+              if (err) throw err;
+            })
+      });
 
-
-
+  res.json(results);
 }
 
 function welcome(req, res) {
