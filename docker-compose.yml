@@ -2,25 +2,22 @@ version: "3"
 services:
 
   mongo:
+    container_name: mongodb
     image: mongo
     restart: always
     volumes:
       - ../:/Cactus
+    ports:
+      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
 
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 3002:3002
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-
   backend:
+    container_name: cactus-webserver
     build: .
+    volumes:
+      - ../:/Cactus
     ports:
       - 3001:3001
     environment:

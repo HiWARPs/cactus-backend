@@ -41,12 +41,14 @@ function uploadFunctions(req, res) {
         .pipe(csv())
         .on('data', (data) => results.push(data))
         .on('end', () => {
-            db.collection('Electrons').insert(results, function(err, result) {
-              if (err) throw err;
-            })
-      });
-
-  res.json(results);
+          db.collection('Electrons').insert(results, function (err, result) {
+            if (err) {
+              res.status(500).json({ err })
+            } else {
+              res.status(201).json({ result })
+            }
+          })
+        });
 }
 
 function welcome(req, res) {
