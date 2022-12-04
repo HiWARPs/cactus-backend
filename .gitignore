@@ -1,3 +1,8 @@
+# csv files, temporary consider removing this once we 
+# are able to process CSV in-memory only. 
+uploads
+
+
 # Logs
 logs
 *.log
