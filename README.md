@@ -1,6 +1,13 @@
 # cactus-backend
 The backend for Project Cactus
 
+## Running 
+
+Use the following to run this app with auto restarts on changes:
+    nodemon ./server.js
+
+
+
 ## Description:
 1. Use the terminal command `docker-compose up` in the base directory of the repository to build the images and to start the containers. This should start the server.
 2. To test the connection to the server, open http://localhost:3001/ in your web browser.

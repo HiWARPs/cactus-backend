@@ -17,6 +17,8 @@ app.use(cors());
 app.get("/", welcome);
 app.get("/test", getTestData)
 
+app.post("/projects", createProject)
+
 var multer  = require('multer');
 const upload = multer({ dest: 'uploads/' })
 
@@ -53,6 +55,9 @@ function uploadFunctions(req, res) {
 
 function welcome(req, res) {
   res.json({ message: "☃️️ Welcome to Project Cactus. Our mock backend is ready for you.️ ☃️" });
+}
+
+function createProject(req, res) {
 }
 
 function getTestData(req, res) {
