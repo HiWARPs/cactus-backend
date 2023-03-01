@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Project Vova - a RESTful backend mock",
   "main": "server.js",
-  "scripts": {
-    "start": "nodemon server.js"
-  },
   "dependencies": {
     "cors": "^2.8.5",
     "csv": "^6.2.2",
