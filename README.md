@@ -29,7 +29,10 @@ To see the logs:
 
     heroku logs --tail 
 
-
+Endpoints to try: 
+    
+    curl https://kaktus-dev.herokuapp.com/
+    curl https://kaktus-dev.herokuapp.com/projects
 
 ## Description:
 1. Use the terminal command `docker-compose up` in the base directory of the repository to build the images and to start the containers. This should start the server.
