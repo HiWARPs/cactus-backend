@@ -21,7 +21,17 @@ const deleteProject = asyncHandler(async (req, res) => {
 })
 
 const updateProject = asyncHandler(async (req, res) => {
-    res.status(200).json({message: `UPDATE not implemented: id ${req.params.id}`})
+
+    const project = await Project.findById(req.params.id)
+    if (!project) {
+        res.status(400)
+        throw new Error("project not found")
+    }
+
+    const updatedProject = await Project.findByIdAndUpdate(req.params.id,
+        req.body, {new: true})
+
+    res.status(200).json(updatedProject)
 })
 
 module.exports = {
