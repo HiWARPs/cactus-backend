@@ -1,12 +1,14 @@
- const express = require('express')
+const express = require('express')
+const router = express.Router();
+const {
+    getProjects,
+    createProject,
+    updateProject,
+    deleteProject
+} = require('../controllers/projects')
 
- const router = express.Router();
 
- // define the first route
- router.get("/", function (req, res) {
-  res.send("<h1>/projects</h1>")
- })
+router.route("/").get(getProjects).post(createProject)
+router.route("/:id").put(updateProject).delete(deleteProject)
 
-
-
- module.exports = router;
+module.exports = router;
