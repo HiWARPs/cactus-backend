@@ -24,6 +24,13 @@ At the top directory call:
 The call above will deploy what is in the current directory.
 
 
+# Working with Heroku
+To see the logs: 
+
+    heroku logs --tail 
+
+
+
 ## Description:
 1. Use the terminal command `docker-compose up` in the base directory of the repository to build the images and to start the containers. This should start the server.
 2. To test the connection to the server, open http://localhost:3001/ in your web browser.
