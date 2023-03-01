@@ -8,11 +8,7 @@ const getProjects = asyncHandler(async (req, res) => {
 })
 
 const createProject = asyncHandler(async (req, res) => {
-
-    const project = await Project.create({
-        name: req.body.name,
-    })
-
+    const project = await Project.create(req.body)
     res.status(200).json(project)
 })
 
