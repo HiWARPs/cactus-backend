@@ -1,11 +1,18 @@
 # cactus-backend
 The backend for Project Cactus
 
-## Running 
+## Running the app while developing 
 
 Use the following to run this app with auto restarts on changes:
-    nodemon ./server.js
+    npm start
 
+This is possible due to importing the `nodemon` dependency and adding this in package.json
+
+```json
+  "scripts": {
+    "start": "nodemon server.js"
+  }
+```
 
 
 ## Description:

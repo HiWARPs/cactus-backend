@@ -58,6 +58,7 @@ function welcome(req, res) {
 }
 
 function createProject(req, res) {
+  const j = 5;
 }
 
 function getTestData(req, res) {
