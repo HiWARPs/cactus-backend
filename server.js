@@ -11,14 +11,9 @@ app.get("/", function (req, res) {
   res.send("<h1>Hello World!</h1>")
 })
 
-
-app.post("/projects", createProject)
-
-
-// define the first route
-app.get("/projects", function (req, res) {
-  res.send("<h1>Hello World!</h1>")
-})
+// Import routes
+const projectRoutes = require('./routes/projects')
+app.use('/projects', projectRoutes)
 
 
 
@@ -37,7 +32,3 @@ db.on('connect', function () {
 // start the server listening for requests
 app.listen(process.env.PORT || 3000,
     () => console.log("Server is running..."));
-
-function createProject(req, res) {
-  const j = 5;
-}
