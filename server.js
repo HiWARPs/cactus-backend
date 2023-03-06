@@ -1,82 +1,31 @@
-"use strict"
-
-const fs = require('fs');
-const express = require("express");
-const app = express();
-const mongojs = require('mongojs');
-const collections = ['Electrons'];
-const db = mongojs('test', collections);
-
-// A security risk: Enabling CORS for development. But do NOT enable it for production.
-const cors = require('cors');
-app.use(cors());
-
-/////////////////////////////////
-// Routes
-//
-app.get("/", welcome);
-app.get("/test", getTestData)
-
-var multer  = require('multer');
-const upload = multer({ dest: 'uploads/' })
-
-// Endpoint which accepts a CSV file and parses it.
-app.post("/functions",upload.single('uploaded_file'), uploadFunctions);
-app.listen(3001)
-console.log("Node.js Express server is listening on port 3001...")
+// create an express app
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 3000
+const colors = require('colors')
 
 
-/////////////////////////////////
-// Implementation of routes
-//
+const connectDB = require('./db')
+connectDB()
+
+// use the express-static middleware
+app.use(express.static("public"))
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+
+// define the first route
+app.get("/", function (req, res) {
+    res.status(200).json({"message": "top directory"})
+})
+
+// Import routes
+const projectRoutes = require('./routes/projects')
+app.use('/projects', projectRoutes)
 
 
-// A function to accept a CSV from a REST endpoint and parse it.
-function uploadFunctions(req, res) {
-    const csv = require('csv-parser')
-    var results = []
+// Connect to DB
+// mongoose.connect(process.env.DATABASE_URL);
 
-
-  fs.createReadStream(req.file.path)
-        .pipe(csv())
-        .on('data', (data) => results.push(data))
-        .on('end', () => {
-          db.collection('Electrons').insert(results, function (err, result) {
-            if (err) {
-              res.status(500).json({ err })
-            } else {
-              res.status(201).json({ result })
-            }
-          })
-        });
-}
-
-function welcome(req, res) {
-  res.json({ message: "☃️️ Welcome to Project Cactus. Our mock backend is ready for you.️ ☃️" });
-}
-
-function getTestData(req, res) {
-  const spin = 1;
-  const min = 20;
-  const max = 120;
-  const inc = 20;
-  db.Electrons.find({
-    '$expr': {
-      '$and': [
-        {'$eq': ['$Spin', spin ]}, 
-        {'$gte':['$Angle', min]},
-        {'$lte':['$Angle', max]},
-        {'$eq': [
-          { '$mod': [{'$subtract': ['$Angle', min]}, inc]}, 0]
-        },
-      ]}
-    },
-    function(err, docs) {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json(docs)
-      }
-    }
-  )
-}
+// start the server listening for requests
+app.listen(port,
+    () => console.log("Server is running..."));
