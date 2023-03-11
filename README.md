@@ -17,6 +17,48 @@ This is possible due to importing the `nodemon` dependency and adding this in pa
 }
 ```
 
+## Sample calls to the /project endpoint
+
+### Create a project
+
+Given that your server is running on port 3000, these examples will get you started in making calls to the API.
+
+```bash
+curl --location 'http://localhost:3000/project' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "name of project"
+}'
+```
+
+### Get projects
+
+```bash
+curl --location 'http://localhost:3000/project'
+```
+
+### Get a single project
+
+```bash
+curl --location 'http://localhost:3000/project/640cbd9111accc64db50201f'
+```
+
+### Update a project
+
+```bash
+curl --location --request PUT 'http://localhost:3000/project/640cbd9111accc64db50201f' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name":"updated name"
+}'
+```
+
+### Delete a project
+
+```bash
+curl --location --request DELETE 'http://localhost:3000/project/640cb94a6278d23a93721e80'
+```
+
 ## Description:
 
 1. Use the terminal command `docker-compose up` in the base directory of the repository to build the images and to start
