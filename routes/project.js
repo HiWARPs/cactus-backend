@@ -5,7 +5,7 @@ const {
     createProject,
     updateProject,
     deleteProject
-} = require('../controllers/projects')
+} = require('../controllers/project')
 
 
 router.route("/").get(getProjects).post(createProject)

@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler')
-const Project = require('../models/projects')
+const Project = require('../models/project')
 
 const getProjects = asyncHandler(async (req, res) => {
     const projects = await Project.find()
