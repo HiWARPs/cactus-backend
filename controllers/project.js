@@ -7,6 +7,22 @@ const getProjects = asyncHandler(async (req, res) => {
     res.status(200).json({message: projects})
 })
 
+const getProjectByID = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const item = await Project.findById(id);
+        if (!item) {
+            return res.status(404).send('Item not found');
+        }
+        res.json(item);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+})
+
+
 const createProject = asyncHandler(async (req, res) => {
     const project = await Project.create(req.body)
     res.status(200).json(project)
@@ -44,6 +60,7 @@ const updateProject = asyncHandler(async (req, res) => {
 
 module.exports = {
     getProjects,
+    getProjectByID,
     createProject,
     updateProject,
     deleteProject
