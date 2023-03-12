@@ -20,7 +20,7 @@ app.get("/", function (req, res) {
 
 // Import routes
 const projectRoutes = require('./routes/projects')
-app.use('/projects', projectRoutes)
+app.use('/project', projectRoutes)
 
 
 // Connect to DB
