@@ -8,6 +8,7 @@ const {
 } = require('../controllers/projects')
 
 const {
+    createForm,
     getForm,
 } = require('../controllers/form')
 
@@ -15,7 +16,7 @@ const {
 router.route("/").get(getProjects).post(createProject)
 router.route("/:id").put(updateProject).delete(deleteProject)
 
+router.route("/:pid/form").post(createForm)
 router.route("/:pid/form/:id").get(getForm)
-
 
 module.exports = router;
