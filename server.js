@@ -8,7 +8,6 @@ const colors = require('colors')
 const connectDB = require('./db')
 connectDB()
 
-// use the express-static middleware
 app.use(express.static("public"))
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -21,7 +20,6 @@ app.get("/", function (req, res) {
 // Import routes
 const projectRoutes = require('./routes/projects')
 app.use('/project', projectRoutes)
-
 
 // start the server listening for requests
 app.listen(port,
