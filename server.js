@@ -8,7 +8,6 @@ const colors = require('colors')
 const connectDB = require('./db')
 connectDB()
 
-// use the express-static middleware
 app.use(express.static("public"))
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
