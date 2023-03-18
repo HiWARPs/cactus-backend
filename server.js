@@ -21,6 +21,10 @@ app.get("/", function (req, res) {
 const projectRoutes = require('./routes/projects')
 app.use('/project', projectRoutes)
 
+
+// Connect to DB
+// mongoose.connect(process.env.DATABASE_URL);
+
 // start the server listening for requests
 app.listen(port,
     () => console.log("Server is running..."));
