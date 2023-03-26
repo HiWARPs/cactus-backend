@@ -1,7 +1,7 @@
 {
-  "name": "A mock backend",
+  "name": "cactus-backend",
   "version": "1.0.0",
-  "description": "Project Vova - a RESTful backend mock",
+  "description": "Project CACTUS - a RESTful backend",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
