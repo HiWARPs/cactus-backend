@@ -1,4 +1,3 @@
-// create an express app
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
@@ -22,9 +21,10 @@ const projectRoutes = require('./routes/projects')
 app.use('/project', projectRoutes)
 
 
-// Connect to DB
-// mongoose.connect(process.env.DATABASE_URL);
+const fRoutes = require('./routes/files')
+app.use('/file', fRoutes)
+
 
 // start the server listening for requests
 app.listen(port,
-    () => console.log("Server is running..."));
+    () => console.log("Server is running on port: " + port));
