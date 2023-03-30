@@ -17,8 +17,7 @@ const {
 router.route("/").get(getProjects).post(createProject)
 router.route("/:id").get(getProjectByID).put(updateProject).delete(deleteProject)
 
+router.route("/:pid/form").post(createForm)
 router.route("/:pid/form/:id").get(getForm)
-router.route("/:pid/form/").post(createForm)
-
 
 module.exports = router;
