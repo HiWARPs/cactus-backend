@@ -18,8 +18,7 @@ const getForm = asyncHandler(async (req, res) => {
 
 const createForm = asyncHandler(async (req, res) => {
   const project = await Project.findById(req.params.pid)
-  console.log(project);
-  console.log(req.body);
+
   if (!project) {
     res.status(400)
     throw new Error("project not found")
