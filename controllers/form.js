@@ -16,6 +16,21 @@ const getForm = asyncHandler(async (req, res) => {
     res.status(200).json(form)
 })
 
+const createForm = asyncHandler(async (req, res) => {
+  const project = await Project.findById(req.params.pid)
+
+  if (!project) {
+    res.status(400)
+    throw new Error("project not found")
+  }
+
+  project.forms.push(req.body)
+  project.save();
+
+  res.status(200).json(project)
+})
+
 module.exports = {
     getForm,
+    createForm,
 }

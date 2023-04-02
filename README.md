@@ -17,6 +17,26 @@ This is possible due to importing the `nodemon` dependency and adding this in pa
 }
 ```
 
+## Sample calls to the /project/:pid/form endpoint
+
+### Create a form
+
+```bash
+curl --location 'http://localhost:3000/project/6425b800328e9c670b4b27b5/form' \
+--header 'Content-Type: application/json' \
+--data '{ 
+    "name": "form name",
+    "description": "form description", 
+    "references" : "form references"
+}'
+```
+
+### Get a single form
+
+```bash
+curl --location 'http://localhost:3000/project/6425b800328e9c670b4b27b5/form/6425bacdbd1388308db5a1bf'
+```
+
 ## Description:
 
 1. Use the terminal command `docker-compose up` in the base directory of the repository to build the images and to start
