@@ -1,5 +1,11 @@
 const mongoose = require('mongoose')
 
+const referencesSchema = new mongoose.Schema( {
+  name: {
+    type: String,
+  },
+})
+
 const xColumnsSchema = new mongoose.Schema( {
     name: {
       type: String,
@@ -22,9 +28,7 @@ const formSchema = new mongoose.Schema({
     description: {
       type: String,
     },
-    references: {
-      type: String,
-    },
+    references: [referencesSchema],
     xColumns: [xColumnsSchema],
     yColumns: [yColumnsSchema],
 })
