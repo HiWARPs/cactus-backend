@@ -25,6 +25,10 @@ const fRoutes = require('./routes/files')
 app.use('/file', fRoutes)
 
 
+const downloadRoutes = require('./routes/download')
+app.use('/download', downloadRoutes)
+
+
 // start the server listening for requests
 app.listen(port,
     () => console.log("Server is running on port: " + port));
