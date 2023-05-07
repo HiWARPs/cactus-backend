@@ -57,8 +57,33 @@ const updateForm = asyncHandler(async (req, res) => {
   res.status(200).json(updatedForm)
 })
 
+const deleteForm = asyncHandler(async (req, res) => {
+
+  const projectId = req.params.pid
+  const formId = req.params.id
+
+  const project = await Project.findById(projectId)
+  if (!project) {
+    res.status(400)
+    throw new Error("project not found")
+  }
+
+  const form = await project.forms.id(formId)
+  if (!form) {
+    res.status(400)
+    throw new Error("form not found")
+  }
+
+  const formWithIdIndex = project.forms.findIndex((obj) => obj.id === formId);
+  project.forms.splice(formWithIdIndex, 1);
+  const deletedForm = await project.save();
+
+  res.status(200).json(deletedForm)
+})
+
 module.exports = {
     getForm,
     createForm,
     updateForm,
+    deleteForm,
 }
