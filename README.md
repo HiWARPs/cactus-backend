@@ -4,6 +4,27 @@ The backend for Project Cactus
 
 ## Running the app while developing
 
+
+*Step 1*: Start the database
+
+To start the DB you can follow the [instructions in Confluene](https://oregonstate-innovationlab.atlassian.net/wiki/spaces/VOVA/pages/61145089/Docker+and+MongoDB).
+
+Or you can use the Makefile. 
+
+In a terminal run `make docker_run`. That will rebuild and run the mongodb docker image.
+
+Running `docker ps` will show a running mongodb container.
+
+```bash
+CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                      NAMES
+c7e14c84ed84   cactus/mongodb   "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   0.0.0.0:27017->27017/tcp   cactus_mongodb
+```
+
+*Step 2*: Start the backend
+
+
+```bash
+
 Use the following to run this app with auto restarts on changes:
 npm start
 
