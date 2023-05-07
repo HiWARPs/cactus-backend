@@ -3,12 +3,14 @@ const mongoose = require('mongoose')
 const referencesSchema = new mongoose.Schema( {
   name: {
     type: String,
+    required: true,
   },
 })
 
 const xColumnsSchema = new mongoose.Schema( {
     name: {
       type: String,
+      required: true,
     },
     range: {
       type: Boolean,
@@ -18,12 +20,14 @@ const xColumnsSchema = new mongoose.Schema( {
 const yColumnsSchema = new mongoose.Schema( {
     name: {
       type: String,
+      required: true,
     },
 })
 
 const formSchema = new mongoose.Schema({
     name: {
         type: String,
+        required: true,
     },
     description: {
       type: String,
@@ -36,6 +40,7 @@ const formSchema = new mongoose.Schema({
 const projectsSchema = new mongoose.Schema({
     name: {
         type: String,
+        required: true,
     },
     forms: [formSchema],
 })
