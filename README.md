@@ -7,7 +7,7 @@ The backend for Project Cactus
 
 *Step 1*: Start the database
 
-To start the DB you can follow the [instructions in Confluene](https://oregonstate-innovationlab.atlassian.net/wiki/spaces/VOVA/pages/61145089/Docker+and+MongoDB).
+To start the DB you can follow the [instructions in Confluence](https://oregonstate-innovationlab.atlassian.net/wiki/spaces/VOVA/pages/61145089/Docker+and+MongoDB).
 
 Or you can use the Makefile. 
 
@@ -26,7 +26,8 @@ c7e14c84ed84   cactus/mongodb   "docker-entrypoint.s…"   3 minutes ago   Up 3 
 ```bash
 
 Use the following to run this app with auto restarts on changes:
-npm start
+
+    npm start
 
 This is possible due to importing the `nodemon` dependency and adding this in package.json
 
@@ -36,6 +37,12 @@ This is possible due to importing the `nodemon` dependency and adding this in pa
     "start": "nodemon server.js"
   }
 }
+```
+
+If you don't have your `.env` file setup to connect to the database, you can use the following command to run the app with a local database:
+
+```bash
+export DATABASE_URL=mongodb://localhost:27017 && npm start
 ```
 
 ## Sample calls to the /project/:pid/form endpoint
@@ -57,6 +64,28 @@ curl --location 'http://localhost:3000/project/6425b800328e9c670b4b27b5/form' \
 ```bash
 curl --location 'http://localhost:3000/project/6425b800328e9c670b4b27b5/form/6425bacdbd1388308db5a1bf'
 ```
+
+## Uploading a file
+
+When running locally, you can upload a file with the following curl command. 
+The file sample.csv is located in the test_data directory.
+
+
+```bash
+curl --location 'http://localhost:3000/file' \
+--form 'file=@"sample.csv"'
+
+```
+
+
+## Working with the download endpoint
+
+/download is the endpoint
+
+curl -o /tmp/what_i_downloaded -v http://localhost:3000/download
+
+This will download a file in the /tmp directory.
+
 
 ## Description:
 
