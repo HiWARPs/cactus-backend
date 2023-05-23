@@ -7,9 +7,9 @@ The backend for Project Cactus
 
 *Step 1*: Start the database
 
-To start the DB you can follow the [instructions in Confluene](https://oregonstate-innovationlab.atlassian.net/wiki/spaces/VOVA/pages/61145089/Docker+and+MongoDB).
+To start the DB you can follow the [instructions in Confluence](https://oregonstate-innovationlab.atlassian.net/wiki/spaces/VOVA/pages/61145089/Docker+and+MongoDB).
 
-Or you can use the Makefile. 
+Or you can use the Makefile.
 
 In a terminal run `make docker_run`. That will rebuild and run the mongodb docker image.
 
@@ -26,7 +26,8 @@ c7e14c84ed84   cactus/mongodb   "docker-entrypoint.s…"   3 minutes ago   Up 3 
 ```bash
 
 Use the following to run this app with auto restarts on changes:
-npm start
+
+    npm start
 
 This is possible due to importing the `nodemon` dependency and adding this in package.json
 
@@ -36,6 +37,12 @@ This is possible due to importing the `nodemon` dependency and adding this in pa
     "start": "nodemon server.js"
   }
 }
+```
+
+If you don't have your `.env` file setup to connect to the database, you can use the following command to run the app with a local database:
+
+```bash
+export DATABASE_URL=mongodb://localhost:27017 && npm start
 ```
 
 ## Sample calls to the /project/:pid/form endpoint
