@@ -7,7 +7,7 @@ The backend for Project Cactus
 
 *Step 1*: Start the database
 
-To start the DB you can follow the [instructions in Confluence](https://oregonstate-innovationlab.atlassian.net/wiki/spaces/VOVA/pages/61145089/Docker+and+MongoDB).
+To start the DB you can follow the [instructions in Confluene](https://oregonstate-innovationlab.atlassian.net/wiki/spaces/VOVA/pages/61145089/Docker+and+MongoDB).
 
 Or you can use the Makefile. 
 
