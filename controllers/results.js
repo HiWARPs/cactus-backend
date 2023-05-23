@@ -21,5 +21,5 @@ const downloadResults = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-    downloadFile: downloadResults,
+    downloadResults: downloadResults,
 }

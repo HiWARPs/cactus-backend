@@ -25,8 +25,8 @@ const fRoutes = require('./routes/files')
 app.use('/file', fRoutes)
 
 
-const downloadRoutes = require('./routes/download')
-app.use('/download', downloadRoutes)
+const resultsRoutes = require('./routes/results')
+app.use('/results', resultsRoutes)
 
 
 // start the server listening for requests
