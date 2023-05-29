@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const dataPointSchema = new mongoose.Schema({
-    X: { type: Number, required: true },
-    YPi: { type: Number, required: true },
-    YerrPi: { type: Number, required: true }
+    X1: { type: Number, required: true },
+    X2: { type: Number, required: true },
+    Y1: { type: Number, required: true }
 });
 
 const electronSchema = new mongoose.Schema({
