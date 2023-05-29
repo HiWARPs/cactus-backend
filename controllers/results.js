@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const Electron = require('../models/electrons')
+const ObjectsToCsv = require('objects-to-csv');
 
 const downloadResults = asyncHandler(async (req, res) => {
     let d = Date.now().valueOf()
@@ -11,14 +12,14 @@ const downloadResults = asyncHandler(async (req, res) => {
         throw new Error('Results not found')
     }
 
-    // TODO: convert to CSV content
-    const fileContent = JSON.stringify(results.raw);
+    const csv = new ObjectsToCsv(results.raw);
+    const fileContent = await csv.toString();
     const fileSize = Buffer.byteLength(fileContent, 'utf8');
 
     res.set({
-            "Content-Disposition": `attachment; filename="${fileName}"`,
-            "Content-Type": "text/plain",
-            "Content-Length": fileSize
+        "Content-Disposition": `attachment; filename="${fileName}"`,
+        "Content-Type": "text/plain",
+        "Content-Length": fileSize
     });
 
     res.send(fileContent)
