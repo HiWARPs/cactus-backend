@@ -1,76 +1,171 @@
-# cactus-backend
+# hiwarp-backend
+API for HiWarp
 
-The backend for Project Cactus
+## Using Taskfile
 
-## Running the app while developing
+See the following for installation: https://taskfile.dev/
+
+`task docker_clean` <-- destroys local mongo
+`task docker_run` <-- starts local mongo
+`task run` <-- runs the service 
+
+## Running the mongo db
+
+TLDR: `make docker_run`
+
+That will run MongoDB in a container.  You can then run `make run` to run the app which will connect to this DB.
+
+## Usage
+
+1. To start the hi-warp API server, run the following command: 
+
+        go run main.go
+
+Using the Makefile, you can run:
+
+        make run
+
+2. The API server should now be running and accessible at http://localhost:3000 (where 3000 is the configured port number from the .env file).
+
+## Testing The Health Point
+
+To test the health endpoint of the API, you can use a tool like cURL or a REST client such as Postman. The health endpoint provides basic information about the status of the API server.
+
+1. Make a GET request to the following endpoint: GET http://localhost:3000/health
+
+You can type the following in a command prompt:
 
 
-*Step 1*: Start the database
+        curl http://localhost:3000/health
 
-To start the DB you can follow the [instructions in Confluence](https://oregonstate-innovationlab.atlassian.net/wiki/spaces/VOVA/pages/61145089/Docker+and+MongoDB).
+2. If the API server is running successfully, you should receive a response with a status code of 200 and a JSON object containing the health information.
 
-Or you can use the Makefile.
 
-In a terminal run `make docker_run`. That will rebuild and run the mongodb docker image.
+# Making queries
 
-Running `docker ps` will show a running mongodb container.
+Import a CSV file like this: 
 
-```bash
-CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                      NAMES
-c7e14c84ed84   cactus/mongodb   "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   0.0.0.0:27017->27017/tcp   cactus_mongodb
+```csv
+x1,x2,y1,y2
+0.1,1.1,2,3
+0.2,1.1,2,3
+0.3,1.2,2,3
+0.4,1.2,2,3
+0.5,1.1,2,3
 ```
 
-*Step 2*: Start the backend
-
-
-```bash
-
-Use the following to run this app with auto restarts on changes:
-
-    npm start
-
-This is possible due to importing the `nodemon` dependency and adding this in package.json
-
-```json
-{
-  "scripts": {
-    "start": "nodemon server.js"
-  }
-}
-```
-
-If you don't have your `.env` file setup to connect to the database, you can use the following command to run the app with a local database:
+Then you can query the API like this:
 
 ```bash
-export DATABASE_URL=mongodb://localhost:27017 && npm start
-```
 
-## Sample calls to the /project/:pid/form endpoint
-
-### Create a form
-
-```bash
-curl --location 'http://localhost:3000/project/6425b800328e9c670b4b27b5/form' \
+curl --location 'localhost:3000/query_electrons' \
 --header 'Content-Type: application/json' \
---data '{ 
-    "name": "form name",
-    "description": "form description", 
-    "references" : "form references"
+--data '{
+    "id": "6539433c7618dd3f7c014e72",
+    "range": {
+        "name": "x1",
+        "lower_bound": 0.1,
+        "upper_bound": 0.4,
+        "increment": 0.1
+    },
+    "x":[
+        {
+            "name": "x2",
+            "value": 1.2
+        }
+    ],
+    "exclude": ["y1"]
 }'
 ```
 
-### Get a single form
+You should get a result like below with filters as well as the increments.
 
-```bash
-curl --location 'http://localhost:3000/project/6425b800328e9c670b4b27b5/form/6425bacdbd1388308db5a1bf'
+```json 
+
+{
+    "id": "6539433c7618dd3f7c014e72",
+    "range": {
+        "name": "x1",
+        "lower_bound": 0.1,
+        "upper_bound": 0.4,
+        "increment": 0.1
+    },
+    "x":[
+        {
+            "name": "x2",
+            "value": 1.2
+        }
+    ],
+    "exclude": ["y1"]
+}
+
 ```
 
-## Description:
+## Another Example
 
-1. Use the terminal command `docker-compose up` in the base directory of the repository to build the images and to start
-   the containers. This should start the server.
-2. To test the connection to the server, open http://localhost:3001/ in your web browser.
-3. Open a second terminal window and use the command `docker ps` to see a list of all running containers. This allows
-   you to see the container id.
-4. To enter a container use the command `docker exec -it <container id> bash`
-5. To write mongo queries, open the mongo shell within the mongo container with the command `mongosh`.
+Using this csv:
+
+```csv
+x1,x2,y1,y2
+0.1,1.1,2,3
+0.2,1.1,2,3
+0.3,1.2,2,3
+0.4,1.2,2,3
+0.5,1.1,2,3
+```
+
+Query the API
+
+```bash
+
+curl --location 'localhost:3000/query_electrons' \
+--header 'Content-Type: application/json' \
+--data '{
+    "id": "6539433c7618dd3f7c014e72",
+    "range": {
+        "name": "x1",
+        "lower_bound": 0.1,
+        "upper_bound": 0.4,
+        "increment": 0.1
+    },
+    "x":[],
+    "exclude": []
+}'
+
+```
+
+It will return this result
+
+```json 
+
+{
+    "_id": "6539433c7618dd3f7c014e72",
+    "data": [
+        {
+            "x1": 0.1,
+            "x2": 1.1,
+            "y1": 2,
+            "y2": 3
+        },
+        {
+            "x1": 0.2,
+            "x2": 1.1,
+            "y1": 2,
+            "y2": 3
+        },
+        {
+            "x1": 0.3,
+            "x2": 1.2,
+            "y1": 2,
+            "y2": 3
+        },
+        {
+            "x1": 0.4,
+            "x2": 1.2,
+            "y1": 2,
+            "y2": 3
+        }
+    ]
+}
+
+```
