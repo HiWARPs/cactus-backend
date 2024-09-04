@@ -1,0 +1,24 @@
+version: '3'
+
+tasks:
+  docker_run:
+    cmds:
+      - echo 'building docker cactus mongo image'
+      - docker build -f Dockerfile -t cactus/mongodb .
+      - docker run -d -p 27017:27017 --name cactus_mongodb cactus/mongodb
+    silent: true
+
+  docker_clean:
+    cmds:
+      - echo 'destroying cactus mongo image'
+      - docker stop cactus_mongodb
+      - docker rm cactus_mongodb
+      - docker rmi cactus/mongodb
+    silent: true
+
+
+  run:
+    cmds:
+      - echo 'running service'
+      - go run main.go
+    silent: true

@@ -1,26 +1,24 @@
-version: "3"
+version: '3.8'
+
 services:
-
-  mongo:
-    container_name: mongodb
-    image: mongo
-    restart: always
-    volumes:
-      - ../:/Cactus
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-
   backend:
-    container_name: cactus-webserver
-    build: .
-    volumes:
-      - ../:/Cactus
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
     ports:
-      - 3001:3001
+      - "3000:3000"
+    depends_on:
+      - mongodb
     environment:
-      - USER=root
+      MONGO_URL: "mongodb://mongodb:27017"
+    
+
+  mongodb:
+    image: cactus/mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
 volumes:
-  backend:
+  mongo_data:

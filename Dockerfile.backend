@@ -1,0 +1,29 @@
+# Use the official Go image as a build environment
+FROM golang:1.19 as builder
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the source code to the container
+COPY . /app
+
+# Build the Go application
+RUN go build -o hiwarp
+
+# Use a minimal base image to run the compiled application
+FROM debian:buster-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the compiled binary from the builder stage
+COPY --from=builder /app/hiwarp .
+
+# Create the uploads directory inside the container
+RUN mkdir -p /app/uploads
+
+# Expose the port on which the service runs
+EXPOSE 3000
+
+# Run the application
+CMD ["./hiwarp"]

@@ -1,19 +1,8 @@
-FROM node:16
+FROM mongo
 
-# Create app directory
-WORKDIR /cactus/backend
+RUN apt-get update
+RUN apt-get -y install vim
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle app source
-COPY . .
-
-EXPOSE 3001
-CMD [ "node", "server.js" ]
+# Run with -p 27017:27017 in order to connect your DB client
+# to this running container.
+EXPOSE 27017
